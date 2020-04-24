@@ -1,3 +1,4 @@
+from __future__ import print_function
 from ah.autohighlight import Autohighlight
 from ah.io import StringIO
 import unittest
@@ -26,7 +27,7 @@ class AhTestContexts(unittest.TestCase):
     def checkContext(self, number):
         sym = self.ourTests[number][0]
         res = self.ourTests[number][1:]
-        print("global symbol dict", self.ah.GlobalSymbolDict)
+        print(("global symbol dict", self.ah.GlobalSymbolDict))
         context = self.ah.GlobalSymbolDict[sym].get_contexts(
             self.ah.GlobalSymbolDict)
         self.assertEqual(

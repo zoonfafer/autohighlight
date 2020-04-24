@@ -1,4 +1,5 @@
-from outputter import Outputter
+from __future__ import absolute_import
+from .outputter import Outputter
 import re
 class EmacsOutputter(Outputter):
     # TODO this needs to go in the docs

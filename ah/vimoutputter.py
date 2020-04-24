@@ -1,5 +1,6 @@
-from outputter import Outputter
-from utils import Set
+from __future__ import absolute_import
+from .outputter import Outputter
+from .utils import Set
 
 class VimOutputter(Outputter):
     # TODO document the builtin color names

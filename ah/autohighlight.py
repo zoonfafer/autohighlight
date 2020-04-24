@@ -1,3 +1,4 @@
+from __future__ import print_function
 from ah.tokenize import Tokenizer
 from ah.utils import Set
 import pprint
@@ -196,7 +197,7 @@ class Autohighlight:
     def parse_color(self):
         """Given that the token generator is at the beginning of the
         coloring section, read color definitions and coloring requests"""
-        begin = self.tokenizer.next()
+        begin = next(self.tokenizer)
         begin.must_be('{')
         for name in self.tokenizer:
             if name.text == '}':
@@ -204,7 +205,7 @@ class Autohighlight:
             name.must_match(
                 "^[A-Za-z]", "%d:%d: Expected a color name, got %s instead." %
                 (name.line, name.col, name.text))
-            midpunct = self.tokenizer.next()
+            midpunct = next(self.tokenizer)
             if midpunct.text == "{":
                 color = self.mkColor(name)
                 if color in self.ColorDefinitions:

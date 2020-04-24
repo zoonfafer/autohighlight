@@ -1,3 +1,4 @@
+from __future__ import print_function
 import pprint
 from ah.trace import funtrace
 from ah.trace import trprint

@@ -1,3 +1,4 @@
+from __future__ import print_function
 def memoize(fun):
     """A clever way to reduce the runtime on the Mystery HELL tests by
     half"""
@@ -8,17 +9,17 @@ def memoize(fun):
             self.__dict__[dictName][rest] = fun(self, *rest)
         return self.__dict__[dictName][rest]
 
-    if '__init__' not in fun.im_class.__dict__:
-        fun.im_class.__dict__['__init__'] = lambda *rest: None
-    oldInit = fun.im_class.__dict__['__init__']
+    if '__init__' not in fun.__self__.__class__.__dict__:
+        fun.__self__.__class__.__dict__['__init__'] = lambda *rest: None
+    oldInit = fun.__self__.__class__.__dict__['__init__']
 
     def init_wrap(self, *rest):
         self.__dict__[dictName] = {}
         # print "Initializing %s" % dictName
         return oldInit(self, *rest)
 
-    fun.im_class.__dict__['__init__'] = init_wrap
-    fun.im_class.__dict__[fun.__name__] = func_wrap
+    fun.__self__.__class__.__dict__['__init__'] = init_wrap
+    fun.__self__.__class__.__dict__[fun.__name__] = func_wrap
 
 
 if __name__ == "__main__":

@@ -45,7 +45,7 @@ def trace(func, printArgs):
 
 def funtrace(func, printArgs):
     """FUNTrace is one of the niftiest little utilities we wrote"""
-    func.im_class.__dict__[func.__name__] = trace(func, printArgs)
+    func.__self__.__class__.__dict__[func.__name__] = trace(func, printArgs)
     return func
 
 
