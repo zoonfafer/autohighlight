@@ -1,4 +1,6 @@
-class Production:
+from builtins import str
+from builtins import object
+class Production(object):
     """Represents a rule in the CON section of the input file."""
     def __init__(self,lhs,elements):
         self.lhs = lhs

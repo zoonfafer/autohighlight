@@ -1,4 +1,7 @@
 from __future__ import print_function
+from builtins import str
+from builtins import range
+from builtins import object
 import pprint
 from ah.trace import funtrace
 from ah.trace import trprint
@@ -10,7 +13,7 @@ from ah.utils import Set
 from ah.memoize import memoize
 
 
-class Symbol:
+class Symbol(object):
     """This is the monster class. It does a lot of the
     theoretically-heavy lifting. A lot of its member functions were
     designed to be memoizable to provide speedups without having to
@@ -49,7 +52,7 @@ class Symbol:
     def isRoot(self):
         """Determine if there are other rules in the grammar
         containing this symbol as an element of a production"""
-        for symbol in self.GlobalSymbolDict.values():
+        for symbol in list(self.GlobalSymbolDict.values()):
             if (symbol == self):
                 continue
             for production in symbol.productions:
@@ -84,7 +87,7 @@ class Symbol:
     def get_contexts(self, alreadySeen=()):
         """Returns a complete list of all the contexts for this symbol."""
         contexts = []
-        for lhs_symbol in self.GlobalSymbolDict.values():
+        for lhs_symbol in list(self.GlobalSymbolDict.values()):
             for production in lhs_symbol.productions:
                 # You HAVE to pair the self with the production
                 # because you may have seen this production, but have

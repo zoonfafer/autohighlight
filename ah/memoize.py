@@ -1,4 +1,5 @@
 from __future__ import print_function
+from builtins import object
 def memoize(fun):
     """A clever way to reduce the runtime on the Mystery HELL tests by
     half"""
@@ -24,7 +25,7 @@ def memoize(fun):
 
 if __name__ == "__main__":
 
-    class testClass:
+    class testClass(object):
         def foo(self, string):
             print(string)
             return string

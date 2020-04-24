@@ -1,4 +1,7 @@
 from __future__ import print_function
+from builtins import next
+from builtins import range
+from builtins import object
 from ah.tokenize import Tokenizer
 from ah.utils import Set
 import pprint
@@ -13,7 +16,7 @@ from ah.production import Production
 pp = pprint.PrettyPrinter()
 
 
-class Autohighlight:
+class Autohighlight(object):
     """The autohighlight class encapsulates all the state of the
     highlighter at any given moment"""
 
@@ -49,7 +52,7 @@ class Autohighlight:
         symbol names have Algol scoping inside the concrete grammar
         portion of the input file, we wait until the whose shebang is
         parsed before attempting to promote tokens into symbols."""
-        for sym in self.GlobalSymbolDict.values():
+        for sym in list(self.GlobalSymbolDict.values()):
             for production in sym.productions:
                 elements = production.elements
                 if len(elements
@@ -259,7 +262,7 @@ class Autohighlight:
     def get_roots(self):
         """Get the roots of the grammar as a list"""
         roots = []
-        for symbol in self.GlobalSymbolDict.values():
+        for symbol in list(self.GlobalSymbolDict.values()):
             if symbol.isRoot():
                 roots += [symbol]
         return roots
@@ -272,7 +275,7 @@ class Autohighlight:
         self.promote_productions()
         self.parse_color()
         self.check_color_scoping()
-        for sym in self.GlobalSymbolDict.values():
+        for sym in list(self.GlobalSymbolDict.values()):
             sym.GlobalSymbolDict = self.GlobalSymbolDict
         self.create_root_symbols()
         self.check_for_multiple_roots()
@@ -302,7 +305,7 @@ class Autohighlight:
     def output(self, outputter):
         """This function takes an outputter object and feeds it the
         user's coloring requests."""
-        for colorName, color in self.ColorDefinitions.iteritems():
+        for colorName, color in self.ColorDefinitions.items():
             if color.predefined:
                 continue
             outputter.appendColorDefinition(color)

@@ -1,4 +1,6 @@
 from __future__ import generators
+from builtins import str
+from builtins import object
 import re
 from ah.token import Token
 
@@ -152,7 +154,7 @@ class Tokenizer(object):
         [(c("[0-9]"), 5, add), ('', 0, tok), (c('.'), 0, push, tok)] \
     ]
 
-    def next(self):
+    def __next__(self):
         """When the generator is used in a for loop, this method is
         called repeatedly to get values. Iteration stops when somebody
         raises a StopIteration exception"""

@@ -1,4 +1,5 @@
-class Color:
+from builtins import object
+class Color(object):
     """Color is a data class representing a predefined or user-defined
     color."""
     def __init__(self, name, predefined=False):

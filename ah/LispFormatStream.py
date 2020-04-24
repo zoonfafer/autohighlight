@@ -1,4 +1,6 @@
-from StringIO import StringIO
+from future import standard_library
+standard_library.install_aliases()
+from io import StringIO
 
 class LispFormatStream (StringIO):
     def __init__(self): self.buffer, self.indent = StringIO(), [0]

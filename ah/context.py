@@ -1,7 +1,9 @@
+from builtins import str
+from builtins import object
 from ah.utils import Set
 
 
-class Context:
+class Context(object):
     """A context is a set of symbols to the left, the symbol we're matching,
     and a set of symbols to the right. There may be more than one context per
     symbol, not all of which will be stored in one context."""

@@ -1,4 +1,5 @@
-class Mapping:
+from builtins import object
+class Mapping(object):
     """A mapping represents a coloring request given by the user in
     the Ah section of the input file."""
     def __init__(self, token, mappings):

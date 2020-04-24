@@ -143,7 +143,7 @@ class AhTestContexts(unittest.TestCase):
 
     def testIsRoot(self):
         roots = []
-        for symbol in self.gsd.values():
+        for symbol in list(self.gsd.values()):
             if symbol.isRoot():
                 roots += [symbol]
         self.assertEqual(len(roots), 1, "Multiple roots found: %s" % roots)

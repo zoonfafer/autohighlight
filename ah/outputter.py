@@ -1,4 +1,5 @@
-class Outputter:
+from builtins import object
+class Outputter(object):
     """An abstract class defining the interface to the outputter
     classes."""
     def appendColorDefinition(self, color):

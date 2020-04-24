@@ -1,3 +1,5 @@
+from builtins import str
+from builtins import range
 indent = 0
 
 from sys import stdout

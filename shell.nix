@@ -6,6 +6,6 @@ stdenv.mkDerivation rec {
   env = buildEnv { name = name; paths = buildInputs; };
   buildInputs = [
     # python
-    (python37.withPackages (ps: with ps; [ virtualenv pip pytest ]))
+    (python37.withPackages (ps: with ps; [ virtualenv pip pytest future ]))
   ];
 }

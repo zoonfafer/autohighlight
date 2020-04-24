@@ -66,7 +66,7 @@ class EmacsOutputter(Outputter):
             rt += "(defface %s\n" % color.emacs_name
             rt += "  '((t "
             rt += "\n       ".join([ "(:%s)" % cssMappers[attr](val) \
-                for attr,val in color.attrs.iteritems() ])
+                for attr,val in color.attrs.items() ])
             rt += "))\n"
             rt += "  \"Generated face for highlighting %ss\"\n" % color.name.text
             rt += "  :group '%s-faces)\n\n" % self.name

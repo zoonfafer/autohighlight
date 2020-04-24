@@ -39,7 +39,7 @@ class AhTestContexts(unittest.TestCase):
         #expected = [Context(Set([gsd["x"]]),gsd['t'],Set([gsd["','"]])) ]
         left_expected = Set('\\,', '\\(')
         right_expected = Set('\\,')
-        for sym in self.ah.GlobalSymbolDict.values():
+        for sym in list(self.ah.GlobalSymbolDict.values()):
             sym.GlobalSymbolDict = gsd
         contexts = gsd['t'].get_contexts()
         left_regex = contexts[0].getLeftRegexes()
