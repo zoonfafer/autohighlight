@@ -1,6 +1,6 @@
 from __future__ import generators
 import re
-from token import Token
+from ah.token import Token
 
 
 class Hi(object):
@@ -95,13 +95,13 @@ class Tokenizer(object):
     def push(self):
         """Push the character back onto the input buffer, consider it
         again later. Updates the text coordinates"""
-        # print "PUSHING!!!!!!!"
+        # print("PUSHING!!!!!!!")
         if self.char == '':
             return
         self.setCursor(self.line, self.col - 1)
         if self.col < 0 or self.char == '\n':
             self.setCursor(self.line - 1, 0)
-        # print "DONE PUSHING!!!!!!"
+        # print("DONE PUSHING!!!!!!")
         self.stream.seek(-1, 1)
 
     def stop(self):
@@ -119,7 +119,7 @@ class Tokenizer(object):
         coordinates are passed to Token to get the text coordinates of
         the first character of the token's definition"""
         self.sline, self.scol = self.line, self.col
-        # print "RESET Token must begin at (%d,%d)" % (self.line, self.col)
+        # print("RESET Token must begin at (%d,%d)" % (self.line, self.col))
         return None
 
     def strangechar(self):
@@ -139,11 +139,11 @@ class Tokenizer(object):
     # a regular expression object from its argument.
     transitions = [ \
         # state 0: initial state \
-        [(c("[A-Za-z]"), 1, reset, add), ('', 0, stop), (c('[0-9]'), 5, reset, add), ('$', 2, reset, add), ("'", 3, reset, add), (c('[][{}:;.]'), 0, reset, add, tok), (c('\s'), 0, noop), (c('.'), 0, strangechar)], \
+        [(c("[A-Za-z]"), 1, reset, add), ('', 0, stop), (c('[0-9]'), 5, reset, add), ('$', 2, reset, add), ("'", 3, reset, add), (c('[][{}:;.]'), 0, reset, add, tok), (c(r'\s'), 0, noop), (c('.'), 0, strangechar)], \
         # state 1: accumulating identifiers \
         [(c("[-A-Za-z0-9_]"), 1, add), ('', 0, tok), (c('.'), 0, push, tok)], \
         # state 2: accumulating regexes \
-        [('', 0, push, tok), (c('\s'), 0, tok), (c('.'), 2, add)], \
+        [('', 0, push, tok), (c(r'\s'), 0, tok), (c('.'), 2, add)], \
         # state 3: accumulating strings \
         [('\\', 4, add), ("'", 0, add, tok), ('', 0, endinstr), (c('.'), 3, add)], \
         # state 4: escaping strings \
@@ -179,7 +179,7 @@ class Tokenizer(object):
 
 
 if __name__ == "__main__":
-    from cStringIO import StringIO
+    from ah.io import StringIO
     import unittest
 
     class LocalTokenTest(unittest.TestCase):

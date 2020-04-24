@@ -1,8 +1,7 @@
+from __future__ import unicode_literals
 import unittest
-from cStringIO import StringIO
-# from tokenize import *
-from ha import *
-# from ha import Token
+from ah.io import StringIO
+from ah.tokenize import *
 
 
 class TokenizerTestCase(unittest.TestCase):
@@ -10,7 +9,7 @@ class TokenizerTestCase(unittest.TestCase):
         try:
             tokenizer = Tokenizer(StringIO(string))
             return [token for token in tokenizer]
-        except TokenizerException, e:
+        except TokenizerException as e:
             return e
 
     def setUp(self):
@@ -94,7 +93,7 @@ class TokenizerTestCase(unittest.TestCase):
             self.assertEqual([Token(1, 0, inichar)], self.tokenList(inichar))
 
     def testInvalidStartTokens(self):
-        invalid = "-_`~!@#%^&*()+=\|?<>,"
+        invalid = r"-_`~!@#%^&*()+=\|?<>,"
         for badchar in invalid:
             tl = self.tokenList(badchar)
             self.assertEqual("UnexpectedCharacter", tl.__class__.__name__)

@@ -1,12 +1,12 @@
 import pprint
-from trace import funtrace
-from trace import trprint
-from trace import trenter
-from trace import trleave
-from context import Context
-from production import Production
-from utils import Set
-from memoize import memoize
+from ah.trace import funtrace
+from ah.trace import trprint
+from ah.trace import trenter
+from ah.trace import trleave
+from ah.context import Context
+from ah.production import Production
+from ah.utils import Set
+from ah.memoize import memoize
 
 
 class Symbol:
@@ -218,6 +218,6 @@ class Symbol:
 #funtrace(Symbol.get_rightmost_expansion_regex, 1)
 
 if __name__ == "__main__":
-    from token import Token
-    from cStringIO import StringIO
-    print "You're running the wrong file."
+    # from ah.token import Token
+    # from ah.io import StringIO
+    print("You're running the wrong file.")

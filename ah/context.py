@@ -1,22 +1,26 @@
-from utils import Set
+from ah.utils import Set
+
+
 class Context:
     """A context is a set of symbols to the left, the symbol we're matching,
     and a set of symbols to the right. There may be more than one context per
     symbol, not all of which will be stored in one context."""
-    def __init__(self,leftSymbols,middleSymbol,rightSymbols):
-        assert(type(leftSymbols).__name__ == 'set')
-        assert(type(rightSymbols).__name__ == 'set')
-        self.leftSymbols=leftSymbols
-        self.rightSymbols=rightSymbols
-        self.middleSymbol=middleSymbol
+
+    def __init__(self, leftSymbols, middleSymbol, rightSymbols):
+        assert (type(leftSymbols).__name__ == 'set')
+        assert (type(rightSymbols).__name__ == 'set')
+        self.leftSymbols = leftSymbols
+        self.rightSymbols = rightSymbols
+        self.middleSymbol = middleSymbol
 
     def __str__(self):
-        return "#C<%s, %s, %s>" % (self.leftSymbols,self.middleSymbol,self.rightSymbols)
+        return "#C<%s, %s, %s>" % (self.leftSymbols, self.middleSymbol,
+                                   self.rightSymbols)
 
     def __repr__(self):
         return str(self)
 
-    def __eq__(self,other):
+    def __eq__(self, other):
         if self.leftSymbols != other.leftSymbols:
             return False
         if self.rightSymbols != other.rightSymbols:
@@ -42,4 +46,3 @@ class Context:
         for symbol in self.rightSymbols:
             regexes.update(symbol.getLeftRegexes())
         return regexes
-

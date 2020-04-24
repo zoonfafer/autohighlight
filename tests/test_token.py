@@ -1,5 +1,5 @@
 import unittest
-from ha import Token
+from ah.token import Token
 
 
 class TokenTestCase(unittest.TestCase):

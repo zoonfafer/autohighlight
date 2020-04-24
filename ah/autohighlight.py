@@ -1,14 +1,13 @@
-from ha import Ha
-from ha import Tokenizer
-from utils import Set
+from ah.tokenize import Tokenizer
+from ah.utils import Set
 import pprint
 import re
-from color import Color
+from ah.color import Color
 # from tokenize import Tokenizer
-from ha import Token
-from symbol import Symbol
-from mapping import Mapping
-from production import Production
+from ah.token import Token
+from ah.symbol import Symbol
+from ah.mapping import Mapping
+from ah.production import Production
 
 pp = pprint.PrettyPrinter()
 
@@ -70,7 +69,7 @@ class Autohighlight:
                             try:
                                 elements[i] = self.GlobalSymbolDict[
                                     elements[i].text]
-                            except KeyError, e:
+                            except KeyError as e:
                                 raise Exception(
                                     "Production for %s beginning at %d,%d: %s is not a symbol."
                                     %
@@ -156,7 +155,7 @@ class Autohighlight:
                     raise Exception(
                         "Unfinished lexical specification beginning with %s" %
                         stack[0])
-                #pp = pprint.PrettyPrinter()
+                # pp = pprint.PrettyPrinter()
                 # pp.pprint(self.GlobalSymbolDict)
                 return
             else:
@@ -181,7 +180,7 @@ class Autohighlight:
                         (stack[0].line, stack[0].col, stack[0].text))
                 stack[1].must_be(":")
                 stack[2].must_match(
-                    "^\w",
+                    r"^\w",
                     "%d:%d: Expected a color attribute value instead of %s" %
                     (stack[2].line, stack[2].col, stack[2].text))
                 color.attrs[stack[0].text] = stack[2].text
@@ -314,8 +313,8 @@ class Autohighlight:
                     raise Exception(
                         "Symbol %s is not colorable because it is not terminal equivalent"
                         % symbol.defining_token.text)
-                print "Generating rules to color %s as %s" % (
-                    symbol.defining_token.text, colorName)
+                print("Generating rules to color %s as %s" %
+                      (symbol.defining_token.text, colorName))
                 color = self.ColorDefinitions[colorName]
                 if (symbol.is_lit):
                     #outputter.appendLiteral(color, symbol.defining_token.text[1:-1] )
