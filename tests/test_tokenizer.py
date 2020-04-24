@@ -7,7 +7,7 @@ from ah.tokenize import *
 class TokenizerTestCase(unittest.TestCase):
     def tokenList(self, string):
         try:
-            tokenizer = Tokenizer(StringIO(string))
+            tokenizer = Tokenizer(StringIO(string.encode()))
             return [token for token in tokenizer]
         except TokenizerException as e:
             return e

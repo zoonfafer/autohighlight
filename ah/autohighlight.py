@@ -85,7 +85,7 @@ class Autohighlight(object):
         lexical symbol specifications, read a series of lexical symbol
         specifications, doing name and basic type analysis on the fly."""
         stack = []
-        self.tokenizer.next().must_be('{')
+        next(self.tokenizer).must_be('{')
         for token in self.tokenizer:
             stack += [token]
             if token.text == ".":
@@ -123,7 +123,7 @@ class Autohighlight(object):
         productions that contain Tokens, not symbols. Conversion from
         tokens to symbols happens in promote_productions."""
         stack = []
-        self.tokenizer.next().must_be('{')
+        next(self.tokenizer).must_be('{')
         for token in self.tokenizer:
             stack += [token]  # Build a stack to process
             if token.text == ".":

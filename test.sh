@@ -48,7 +48,7 @@ run_tests() {
 
 	if ((run_as_module))
 	then
-		rm "${test_mod_init}"{,c}
+		rm -f "${test_mod_init}"{,c} || :
 	fi
 
 	return "${total_rv}"
@@ -81,8 +81,13 @@ greppy() {
 
 main() {
 	local -a tests=(
-		token tokenizer ah3 ah4 type
-		ah ah2
+		# token
+		tokenizer
+		# ah3
+		# ah4
+		# type
+		# ah
+		# ah2
 	)
 
 	if [[ $# -ne 0 ]]

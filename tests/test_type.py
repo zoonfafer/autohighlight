@@ -20,7 +20,7 @@ test1file = \
 class AhTestContexts(unittest.TestCase):
     def setUp(self):
         global test1file
-        self.ah = Autohighlight(StringIO(test1file))
+        self.ah = Autohighlight(StringIO(test1file.encode()))
         self.ah.parse()
 
     def testGetContextsForIdn(self):

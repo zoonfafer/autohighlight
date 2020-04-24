@@ -1,13 +1,25 @@
+from __future__ import print_function
 from __future__ import generators
 from builtins import str
 from builtins import object
 import re
 from ah.token import Token
 
+regexType = type(re.compile(''))
 
-class Hi(object):
-    def __init__(self):
-        return self
+
+def isRegex(s):
+    return isinstance(s, regexType)
+
+
+def patternMatches(pat, char):
+    # Python2 would have future.types.newstr.newstr instead of str
+    if isinstance(char, bytes):
+        schar = char.decode()
+    else:
+        schar = char
+    return isinstance(pat, type('')) and pat == schar or \
+        isRegex(pat) and pat.match(schar)
 
 
 class TokenizerException(Exception):
@@ -64,15 +76,20 @@ class Tokenizer(object):
         return value. The last action's return value is returned from
         this function."""
         statedef = self.transitions[self.state]
+        # print("trasitions: %s" % self.transitions)
+        print("statedef for state %s: %s" % (self.state, statedef))
         for path in statedef:
             pat, dest = path[:2]
             retval = None
-            if type(pat).__name__ == "str" and pat == self.char or \
-               type(pat).__name__ == "SRE_Pattern" and pat.match(self.char):  # Regexp objects match like regexps
+            if patternMatches(pat,
+                              self.char):  # Regexp objects match like regexps
                 for action in path[2:]:
                     retval = action(
                         self)  # Keep the return value to return from ourselves
                 self.state = dest
+                print(
+                    " \033[1m.\033[22m \033[38;5;33mMatching path for char %s from state %d.\033[0m"
+                    % (self.char, self.state))
                 return retval
         raise Exception("No matching path for char %s from state %d." %
                         (self.char, self.state))
@@ -87,7 +104,8 @@ class Tokenizer(object):
     # do.
     def add(self):
         """Add the character to the token being built up"""
-        self.token += self.char
+        self.token += (self.char.decode()
+                       if isinstance(self.char, bytes) else self.char)
         return None
 
     def tok(self):
