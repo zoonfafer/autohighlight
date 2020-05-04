@@ -35,6 +35,10 @@ class Context(object):
         """Returns a set of regexes that matches the right hand side of the expansion of the left symbols"""
         regexes = Set()
         for symbol in self.leftSymbols:
+            # print(" ..> left symbol: %s" % symbol)
+            # print(" ..> left symbol.regex: %s" % symbol.regex)
+            # print("  ...> updating with right regex: %s" %
+            #       symbol.getRightRegexes())
             regexes.update(symbol.getRightRegexes())
         return regexes
 

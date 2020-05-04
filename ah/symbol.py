@@ -67,7 +67,10 @@ class Symbol(object):
         equivalent symbols, return a set of regular expressions so
         that every terminal this symbol can produce matches at least
         one of them."""
+        # print(" t-- --> self: %s" % self)
         if self.is_gla or self.is_lit:
+            # print(" t-- --> is gla / lit. returning self regex: %s" %
+            #       self.regex)
             return self.regex
         regexes = Set()
         for production in self.productions:
@@ -111,8 +114,8 @@ class Symbol(object):
         production if necessary (in the case that there is no symbol
         to the left or right of this symbol in the production.)"""
         contexts = []
-        print("alreadySeen type is " + str(type(alreadySeen)))
-        print("alreadySeen is " + str(alreadySeen))
+        # print("alreadySeen type is " + str(type(alreadySeen)))
+        # print("alreadySeen is " + str(alreadySeen))
         # alreadySeen.update((self, production), )
         # alreadySeen[self] = production
         import sys
@@ -167,6 +170,7 @@ class Symbol(object):
     def getRightRegexes(self):
         """Get a set of regexes matching the right-most symbol in the
         complete expansion of this symbol."""
+        # print(" ..> getting right regexes")
         return self.get_xmost_expansion_regexes(-1)
 
     def getLeftRegexes(self):
@@ -178,9 +182,11 @@ class Symbol(object):
         """This does the real work of the two functions above. """
         xmost_regexes = Set()
         if self.get_terminal_equivalent_regexes() is not None:
+            # print(" --> get terminal equivalent is not none")
             return self.get_terminal_equivalent_regexes()
         for production in self.productions:
             elements = production.elements
+            # print(" --> elements: %s" % elements)
             if len(elements) == 0:
                 # XXX: It seems that when we find an empty production,
                 # the expansion regexes come from the context of the
@@ -188,6 +194,7 @@ class Symbol(object):
                 parent_regexes = Set()
                 for context in production.lhs.get_contexts():
                     for symbol in context.leftSymbols:
+                        # print(" -- --> symbol: %s" % symbol)
                         parent_regexes.update(
                             symbol.get_xmost_expansion_regexes(
                                 direction, alreadySeen + (self, )))
