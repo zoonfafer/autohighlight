@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # autohighlighter - Automatically generate VIM and emacs coloring from BNF grammars
 # Copyright (C) 2006 Scotty Allen, Scott Williams
 # Copyright (C) 2020 Jeffrey Lau
