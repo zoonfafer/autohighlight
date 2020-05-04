@@ -1,1 +1,3 @@
+future==0.18.2
 pytest-todo==0.2.1
+six==1.13.0
