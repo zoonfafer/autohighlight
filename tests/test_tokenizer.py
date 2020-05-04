@@ -17,7 +17,7 @@
 from __future__ import unicode_literals
 import unittest
 from ah.io import StringIO
-from ah.tokenize import *
+from ah.tokenizer import *
 
 
 class TokenizerTestCase(unittest.TestCase):

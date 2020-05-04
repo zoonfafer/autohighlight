@@ -18,7 +18,7 @@ from __future__ import print_function
 from builtins import next
 from builtins import range
 from builtins import object
-from ah.tokenize import Tokenizer
+from ah.tokenizer import Tokenizer
 from ah.utils import Set
 import pprint
 import re
