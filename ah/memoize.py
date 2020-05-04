@@ -16,6 +16,8 @@
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import print_function
 from builtins import object
+
+
 def memoize(fun):
     """A clever way to reduce the runtime on the Mystery HELL tests by
     half"""

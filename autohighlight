@@ -27,18 +27,24 @@ import re
 from ah.symbol import Symbol
 from ah.vimoutputter import VimOutputter
 from ah.EmacsOutputter import EmacsOutputter
-from ah.utils import Set
 
 
 def usage():
-    print("""Usage: python ah.py [OPTION]... [FILE]
+    print("""Usage: ./autohighlight [--vim|--emacs] [OPTION]... [FILE]
 Generates the specified syntax highlighting files from the given input FILE.
 
+Mandatory arguments:
+      --vim            Generate a Vim syntax highlighting file
+      --emacs          Generate an Emacs font locking file
+
 Options:
-  -h, --help  Prints this help
-      --vim   Generates a vim syntax highlighting file
-      --emacs Generates an emacs font locking file
-      --error-checking Highlight all symbols not currently being colored as errors (currently works for vim only)
+  -h, --help           Print this help
+      --error-checking Highlight all symbols not currently being colored as
+                       errors (currently works for Vim only)
+
+Advanced options:
+      --memoize        Reduce run time for certain tests
+      --profile        Print out profiling info
 """)
 
 
