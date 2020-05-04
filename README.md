@@ -102,14 +102,21 @@ file suffix.  Then, the compiler should be run.  The full command line syntax
 is as follows:
 
 ```
-  Usage: python ah.py [OPTION]... [FILE]
-  Generates the specified syntax highlighting files from the given input FILE.
+Usage: ./autohighlight [--vim|--emacs] [OPTION]... [FILE]
+Generates the specified syntax highlighting files from the given input FILE.
 
-  Options:
-    -h, --help  Prints this help
-        --vim   Generates a vim syntax highlighting file
-        --emacs Generates an emacs font locking file
-        --error-checking Highlight all symbols not currently being colored as errors (currently works for vim only)
+Mandatory arguments:
+      --vim            Generate a Vim syntax highlighting file
+      --emacs          Generate an Emacs font locking file
+
+Options:
+  -h, --help           Print this help
+      --error-checking Highlight all symbols not currently being colored as
+                       errors (currently works for Vim only)
+
+Advanced options:
+      --memoize        Reduce run time for certain tests
+      --profile        Print out profiling info
 ```
 
 This will yield _filename_.vim and _filename_.el files for Vim and Emacs
