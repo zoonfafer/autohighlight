@@ -20,7 +20,6 @@ from ah.autohighlight import Autohighlight
 from ah.io import StringIO
 from ah.context import Context
 import unittest
-import pprint
 
 test1file = \
     """
