@@ -81,11 +81,11 @@ greppy() {
 
 main() {
 	local -a tests=(
-		# token
+		token
 		tokenizer
-		# ah3
-		# ah4
-		# type
+		ah3
+		ah4
+		type
 		# ah
 		# ah2
 	)
