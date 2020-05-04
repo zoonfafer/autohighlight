@@ -116,10 +116,10 @@ class Tokenizer(object):
         """Push the character back onto the input buffer, consider it
         again later. Updates the text coordinates"""
         # print("PUSHING!!!!!!!")
-        if self.char == '':
+        if self.char == b'':
             return
         self.setCursor(self.line, self.col - 1)
-        if self.col < 0 or self.char == '\n':
+        if self.col < 0 or self.char == b'\n':
             self.setCursor(self.line - 1, 0)
         # print("DONE PUSHING!!!!!!")
         self.stream.seek(-1, 1)
@@ -186,14 +186,14 @@ class Tokenizer(object):
             # Do a state-machine transition
             retval = self.transition()
             # Text coordinate upkeep: detect pushes.
-            if self.char == '\n':
+            if self.char == b'\n':
                 self.setCursor(self.line + 1, 0)
             else:
                 self.setCursor(self.line, self.col + 1)
             if retval:
                 # Keep considering new characters until a token is built.
                 return retval
-            if self.char == '':
+            if self.char == b'':
                 raise StopIteration()
         # end next()
 

@@ -5,6 +5,7 @@ from ah.io import StringIO
 from ah.context import Context
 import unittest
 from ah.utils import Set
+import re
 
 test1file = \
     """
@@ -37,8 +38,8 @@ class AhTestContexts(unittest.TestCase):
     def testGetRegexesForT(self):
         gsd = self.ah.GlobalSymbolDict
         #expected = [Context(Set([gsd["x"]]),gsd['t'],Set([gsd["','"]])) ]
-        left_expected = Set('\\,', '\\(')
-        right_expected = Set('\\,')
+        left_expected = Set(list(map(lambda x: re.escape(x), [',', '('])))
+        right_expected = Set(list(map(lambda x: re.escape(x), [','])))
         for sym in list(self.ah.GlobalSymbolDict.values()):
             sym.GlobalSymbolDict = gsd
         contexts = gsd['t'].get_contexts()

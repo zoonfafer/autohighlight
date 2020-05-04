@@ -177,7 +177,7 @@ class Symbol(object):
     def get_xmost_expansion_regexes(self, direction, alreadySeen=()):
         """This does the real work of the two functions above. """
         xmost_regexes = Set()
-        if self.get_terminal_equivalent_regexes() != None:
+        if self.get_terminal_equivalent_regexes() is not None:
             return self.get_terminal_equivalent_regexes()
         for production in self.productions:
             elements = production.elements
