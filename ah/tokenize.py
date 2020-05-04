@@ -64,7 +64,6 @@ class Tokenizer(object):
         return self
 
     def setCursor(self, line, col):
-        # print("  \033[33mset cursor, line: %s, col: %s\033[m" % (line, col))
         """Sets the text coordinates. This doesn't seem like it should
         need its own function, but experience proves it's a nice place
         to hook into while debugging."""
@@ -77,8 +76,6 @@ class Tokenizer(object):
         return value. The last action's return value is returned from
         this function."""
         statedef = self.transitions[self.state]
-        # print("trasitions: %s" % self.transitions)
-        # print("statedef for state %s: %s" % (self.state, statedef))
         for path in statedef:
             pat, dest = path[:2]
             retval = None
@@ -88,9 +85,6 @@ class Tokenizer(object):
                     retval = action(
                         self)  # Keep the return value to return from ourselves
                 self.state = dest
-                # print(
-                #     " \033[1m.\033[22m \033[38;5;33mMatching path for char %s from state %d.\033[0m"
-                #     % (self.char, self.state))
                 return retval
         raise Exception("No matching path for char %s from state %d." %
                         (self.char, self.state))
@@ -121,7 +115,6 @@ class Tokenizer(object):
             return
         self.setCursor(self.line, self.col - 1)
         if self.col < 0 or self.char == b'\n':
-            # print("wow, got self char \\n!, line --")
             self.setCursor(self.line - 1, 0)
         # print("DONE PUSHING!!!!!!")
         self.stream.seek(-1, 1)
@@ -188,13 +181,9 @@ class Tokenizer(object):
             # Do a state-machine transition
             retval = self.transition()
             # Text coordinate upkeep: detect pushes.
-            # print("self char is %s" % self.char)
-            # print("self line is %s" % self.line)
             if self.char == b'\n':
-                # print("true dat.")
                 self.setCursor(self.line + 1, 0)
             else:
-                # print("not dat.")
                 self.setCursor(self.line, self.col + 1)
             if retval:
                 # Keep considering new characters until a token is built.

@@ -37,19 +37,12 @@ class AhTestContexts(unittest.TestCase):
 
     def testGetRegexesForT(self):
         gsd = self.ah.GlobalSymbolDict
-        # print("gsd: %s" % gsd)
         #expected = [Context(Set([gsd["x"]]),gsd['t'],Set([gsd["','"]])) ]
-        # left_expected = Set('\\,', '\\(')
-        # right_expected = Set('\\,')
         left_expected = Set(list(map(lambda x: re.escape(x), [',', '('])))
         right_expected = Set(list(map(lambda x: re.escape(x), [','])))
         for sym in list(self.ah.GlobalSymbolDict.values()):
             sym.GlobalSymbolDict = gsd
-        # print("gsd['t']: %s" % gsd['t'])
         contexts = gsd['t'].get_contexts()
-        # print("context : %s" % contexts)
-        # print("context0: %s" % contexts[0])
-        # print("context0.getLeft: %s" % contexts[0].getLeftRegexes())
         left_regex = contexts[0].getLeftRegexes()
         self.assertEqual(
             left_regex, left_expected,
