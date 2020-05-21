@@ -98,6 +98,13 @@ test-all-pythons: test-p2 test-p35 test-p36 test-p37 test-p38
 
 .PHONY: test
 ## Run test under system python
-test:
+test: tmp/email.ah
 	# pytest
 	python -m pytest
+	./autohighlight --vim $^
+	./autohighlight --emacs $^
+	rm -rf tmp/
+
+tmp/%.ah: samples/%.ah
+	mkdir -p tmp
+	cp $^ $@

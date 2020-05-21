@@ -1,4 +1,5 @@
 *.prof
+tmp/
 
 # Created by https://www.gitignore.io/api/emacs,intellij+all,linux,osx,sublimetext,textmate,vim,visualstudiocode,webstorm,windows,python
 # Edit at https://www.gitignore.io/?templates=emacs,intellij+all,linux,osx,sublimetext,textmate,vim,visualstudiocode,webstorm,windows,python
