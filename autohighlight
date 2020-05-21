@@ -18,6 +18,8 @@
 
 from __future__ import print_function
 from ah.autohighlight import Autohighlight
+import hotshot
+import hotshot.stats
 from ah.memoize import memoize
 import sys
 import getopt
@@ -42,7 +44,7 @@ Options:
 
 Advanced options:
       --memoize        Reduce run time for certain tests
-      --profile        Print out profiling info (TBI)
+      --profile        Print out profiling info
 """)
 
 
@@ -110,8 +112,14 @@ def main_interface():
             sys.exit(2)
 
     if profile:
-        print("TBI")
-        do_it()
+        fn = "sample%s.prof" % "".join(sys.argv[1:-1])
+        prof = hotshot.Profile(fn)
+        prof.runcall(do_it)
+        prof.close()
+        stats = hotshot.stats.load(fn)
+        stats.strip_dirs()
+        stats.sort_stats('time', 'calls')
+        stats.print_stats()
     else:
         do_it()
 

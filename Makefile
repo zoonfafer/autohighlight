@@ -61,9 +61,14 @@ help:
 clean:
 	find . -name '*.pyc' -exec rm {} \+
 
-.PHONY: test-nix
+.PHONY: test-p2
+## Run test under python2.7
+test-p2: shell-p2.nix
+	nix-shell $< --command 'make test'
+
+.PHONY: test-p3
 ## Run test under python3 (default: 3.8)
-test-nix: test-p38
+test-p3: test-p38
 
 .PHONY: test-p35
 ## Run test under python3.5
@@ -86,8 +91,8 @@ test-p38: shell-p38.nix
 	nix-shell $< --command 'make test'
 
 .PHONY: test-all-pythons
-## Run test under python 3.5, 3.6, 3.7 and 3.8
-test-all-pythons: test-p35 test-p36 test-p37 test-p38
+## Run test under python 2.7, 3.5, 3.6, 3.7 and 3.8
+test-all-pythons: test-p2 test-p35 test-p36 test-p37 test-p38
 
 .PHONY: test
 ## Run test under system python
