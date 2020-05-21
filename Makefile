@@ -1,3 +1,5 @@
+NIX_DIR := nix
+
 # https://gist.github.com/klmr/575726c7e05d8780505a
 # Inspired by
 # <http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html>
@@ -63,7 +65,7 @@ clean:
 
 .PHONY: test-p2
 ## Run test under python2.7
-test-p2: shell-p2.nix
+test-p2: $(NIX_DIR)/shell-p2.nix
 	nix-shell $< --command 'make test'
 
 .PHONY: test-p3
@@ -72,22 +74,22 @@ test-p3: test-p38
 
 .PHONY: test-p35
 ## Run test under python3.5
-test-p35: shell-p35.nix
+test-p35: $(NIX_DIR)/shell-p35.nix
 	nix-shell $< --command 'make test'
 
 .PHONY: test-p36
 ## Run test under python3.6
-test-p36: shell-p36.nix
+test-p36: $(NIX_DIR)/shell-p36.nix
 	nix-shell $< --command 'make test'
 
 .PHONY: test-p37
 ## Run test under python3
-test-p37: shell-p37.nix
+test-p37: $(NIX_DIR)/shell-p37.nix
 	nix-shell $< --command 'make test'
 
 .PHONY: test-p38
 ## Run test under python3.8
-test-p38: shell-p38.nix
+test-p38: $(NIX_DIR)/shell-p38.nix
 	nix-shell $< --command 'make test'
 
 .PHONY: test-all-pythons
