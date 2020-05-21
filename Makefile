@@ -82,7 +82,7 @@ test-p36: shell-p36.nix
 
 .PHONY: test-p37
 ## Run test under python3
-test-p3: shell-p37.nix
+test-p37: shell-p37.nix
 	nix-shell $< --command 'make test'
 
 .PHONY: test-p38
