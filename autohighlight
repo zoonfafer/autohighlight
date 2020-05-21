@@ -17,16 +17,17 @@
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import print_function
-from ah.autohighlight import Autohighlight
-import hotshot
-import hotshot.stats
-from ah.memoize import memoize
-import sys
-import getopt
-import re
-from ah.symbol import Symbol
-from ah.vimoutputter import VimOutputter
 from ah.EmacsOutputter import EmacsOutputter
+from ah.vimoutputter import VimOutputter
+from ah.symbol import Symbol
+import re
+import getopt
+import sys
+from ah.memoize import memoize
+from ah.autohighlight import Autohighlight
+if sys.version_info[0] < 3:
+    import hotshot
+    import hotshot.stats
 
 
 def usage():
@@ -44,8 +45,8 @@ Options:
 
 Advanced options:
       --memoize        Reduce run time for certain tests
-      --profile        Print out profiling info
-""")
+      --profile        Print out profiling info %s
+""" % ("" if sys.version_info[0] < 3 else "(TBI)"))
 
 
 def strip_filename(filename):
@@ -112,14 +113,18 @@ def main_interface():
             sys.exit(2)
 
     if profile:
-        fn = "sample%s.prof" % "".join(sys.argv[1:-1])
-        prof = hotshot.Profile(fn)
-        prof.runcall(do_it)
-        prof.close()
-        stats = hotshot.stats.load(fn)
-        stats.strip_dirs()
-        stats.sort_stats('time', 'calls')
-        stats.print_stats()
+        if sys.version_info[0] < 3:
+            fn = "sample%s.prof" % "".join(sys.argv[1:-1])
+            prof = hotshot.Profile(fn)
+            prof.runcall(do_it)
+            prof.close()
+            stats = hotshot.stats.load(fn)
+            stats.strip_dirs()
+            stats.sort_stats('time', 'calls')
+            stats.print_stats()
+        else:
+            print("TBI")
+            do_it()
     else:
         do_it()
 
