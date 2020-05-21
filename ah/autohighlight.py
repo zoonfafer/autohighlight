@@ -45,7 +45,7 @@ class Autohighlight(object):
         self.tokenizer = None  # The token generator
         if type(file).__name__ == 'str':
             self.tokenizer = Tokenizer(
-                open(file)
+                open(file, "rb")
             )  # behave nicely when given a filename instead of a stream
         else:
             self.tokenizer = Tokenizer(file)
